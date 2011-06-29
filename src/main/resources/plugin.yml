@@ -1,0 +1,30 @@
+name: Rocket
+main: shamebot.Rocket.Rocket
+version: 0.5
+author: Shamebot
+description: Launches a player into space.
+commands:
+    launch:
+     description: Launches a player into space.
+     usage:
+         /<command> <duration> [playername|entityId]
+    launcher:
+     description: Enables launcher mode.
+     usage:
+         /<command> <duration>
+    halt:
+     description: Stops acceleration.
+     usage:
+         /<command> [playername|entityId]
+    shoot:
+     description: Shoots a player in the direction you're facing.
+     usage:
+         /<command> <duration> [playername|entityId]
+    shooter:
+     description: Enables shooter mode.
+     usage:
+         /<command> <duration>
+    fly:
+     description: !!disabled!!
+     usage:
+         /<command> <strength>
