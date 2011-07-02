@@ -65,8 +65,8 @@ public class Smoke extends Schedulable
 	}
 	//sends the smoke packet to all players in radius 64 basically notch's explosion code, dunno why 64 since you can only see it in radius 8, 
 	public void sendAll()
-	{																			//method will break soon, renamed to sendnearby
-		((CraftServer)Bukkit.getServer()).getServer().serverConfigurationManager.a(loc.getX(),loc.getY(),loc.getZ(),64,((CraftWorld)loc.getWorld()).getHandle().dimension, new Packet60Explosion(loc.getX(),loc.getY(),loc.getZ(),f,blocks));
+	{																			
+		((CraftServer)Bukkit.getServer()).getServer().serverConfigurationManager.sendPacketNearby(loc.getX(),loc.getY(),loc.getZ(),64,((CraftWorld)loc.getWorld()).getHandle().dimension, new Packet60Explosion(loc.getX(),loc.getY(),loc.getZ(),f,blocks));
 	}
 
 	//is called from scheduler every X ticks

@@ -1,6 +1,6 @@
 name: Rocket
-main: shamebot.Rocket.Rocket
-version: 0.5
+main: shamebot.rocket.Rocket
+version: 0.501
 author: Shamebot
 description: Launches a player into space.
 commands:
@@ -25,6 +25,6 @@ commands:
      usage:
          /<command> <duration>
     fly:
-     description: !!disabled!!
+     description: '!!disabled!!'
      usage:
          /<command> <strength>
