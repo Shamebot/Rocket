@@ -31,14 +31,7 @@ public class Rocketeer extends Schedulable{
 	public Rocketeer(Entity entity, int tail, Vector vec, int duration, boolean explode)
 	{
 		this(entity, tail, vec, duration);
-		if(explode)
-		{
-			this.explode = true;
-		}
-		else
-		{
-			this.explode = new Random().nextInt(1000) == 0;
-		}
+		this.explode = explode?true:new Random().nextInt(1000) == 0;
 	}
 
 	@Override
@@ -72,8 +65,8 @@ public class Rocketeer extends Schedulable{
 		}
 		catch (IllegalStateException e)
 		{
-			Bukkit.getServer().broadcastMessage("failed to create smoke");
-			System.out.println("failed to create smoke");
+			//Bukkit.getServer().broadcastMessage("failed to create smoke");
+			//System.out.println("failed to create smoke");
 		}
 	}
 

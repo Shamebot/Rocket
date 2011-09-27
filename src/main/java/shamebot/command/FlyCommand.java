@@ -1,5 +1,6 @@
 package shamebot.command;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
@@ -45,8 +46,7 @@ public class FlyCommand extends ModeCommand implements IPlayerInteractListener{
 		{
 			vec.multiply(-i/100D);
 		}
-		rocketeer.setVector(vec);
+		rocketeer.setVector(vec.setY(vec.getY() + 0.1));
 		
 	}
-	
 }

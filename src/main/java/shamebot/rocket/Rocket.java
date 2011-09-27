@@ -1,6 +1,6 @@
 package shamebot.rocket;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Filter;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -24,6 +24,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
 import shamebot.command.FlyCommand;
+import shamebot.command.KickCommand;
 import shamebot.command.LaunchCommand;
 import shamebot.command.LauncherCommand;
 import shamebot.command.ModeCommand;
@@ -36,7 +37,7 @@ import shamebot.command.StopCommand;
 
 public class Rocket extends JavaPlugin {
 
-	private ArrayList<Rocketeer> flying = new ArrayList<Rocketeer>();
+	private HashMap<Entity,Rocketeer> flying = new HashMap<Entity, Rocketeer>();
 	private Logger log = Logger.getLogger("Minecraft");
 	private RocketPermission rocketPermission;
 	
@@ -46,6 +47,7 @@ public class Rocket extends JavaPlugin {
 	ShootCommand shoot;
 	ShooterCommand shooter;
 	FlyCommand fly;
+	KickCommand kick;
 	
     public void onDisable() {
     	PluginDescriptionFile pdFile = getDescription();
@@ -64,7 +66,8 @@ public class Rocket extends JavaPlugin {
         			if(rocketeer != null)
         			{
 	    				e.setCancelled(true);
-	    				flying.remove(rocketeer);
+	    				rocketeer.stop();
+	    				flying.remove(e.getEntity());
         			}
     			}
     		}
@@ -124,7 +127,8 @@ public class Rocket extends JavaPlugin {
         stop = new StopCommand(this);
         shoot = new ShootCommand(this);
         shooter = new ShooterCommand(this);
-        //fly = new FlyCommand(this);
+        fly = new FlyCommand(this);
+        kick = new KickCommand(this);
         
         rocketPermission = new RocketPermission();
         
@@ -139,7 +143,8 @@ public class Rocket extends JavaPlugin {
         getCommand("halt").setExecutor(stop);
         getCommand("shoot").setExecutor(shoot);
         getCommand("shooter").setExecutor(shooter);
-        //getCommand("fly").setExecutor(fly);
+        getCommand("fly").setExecutor(fly);
+        getCommand("rkick").setExecutor(kick);
         
     	PluginDescriptionFile pdFile = getDescription();
         log.info(pdFile.getName() + " version " + pdFile.getVersion() + " enabled!" );
@@ -156,22 +161,15 @@ public class Rocket extends JavaPlugin {
     
     public Rocketeer launch(Entity entity, int tail, Vector vec, int duration, boolean explode, int period)
     {
-    	Rocketeer rocketeer = new Rocketeer(entity,tail,vec,duration,explode);
+    	Rocketeer rocketeer = new Rocketeer(entity,tail,vec,duration/*, explode*/);
     	Schedulable.scheduleSyncRepeatingTask(rocketeer,period);
-    	flying.add(rocketeer);
+    	flying.put(entity, rocketeer);
     	return rocketeer;
     }
     
     public Rocketeer getRocketeer(Entity entity)
     {
-    	for(Rocketeer rocketeer : flying)
-    	{
-    		if(rocketeer.getEntity() == entity)
-    		{
-    			return rocketeer;
-    		}
-    	}
-    	return null;
+    	return flying.get(entity);
     }
     
     public Entity getEntityById(int id)

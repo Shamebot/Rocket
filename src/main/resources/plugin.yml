@@ -1,6 +1,6 @@
 name: Rocket
 main: shamebot.rocket.Rocket
-version: 0.501
+version: 0.6
 author: Shamebot
 description: Launches a player into space.
 commands:
@@ -25,6 +25,10 @@ commands:
      usage:
          /<command> <duration>
     fly:
-     description: '!!disabled!!'
+     description: Use left + rightclick to fly
      usage:
-         /<command> <strength>
+         /<command> <strength> [playername|entityId]
+    rkick:
+     description: Launches a player and kicks him
+     usage:
+         /<command> <strength> [playername|entityId]
