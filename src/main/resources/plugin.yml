@@ -1,6 +1,6 @@
 name: Rocket
 main: shamebot.rocket.Rocket
-version: 0.6
+version: 0.61
 author: Shamebot
 description: Launches a player into space.
 commands:

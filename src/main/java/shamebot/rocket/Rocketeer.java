@@ -56,7 +56,7 @@ public class Rocketeer extends Schedulable{
 			Schedulable.scheduleSyncRepeatingTask(new Explosion(entity, inv), 1);
 		}
 		entity.setVelocity(vec);
-		Location loc = entity.getLocation().add(0, 1, 0);
+		Location loc = entity.getLocation().add(0,1,0);
 		Smoke smoke = new Smoke(loc);
 		try
 		{

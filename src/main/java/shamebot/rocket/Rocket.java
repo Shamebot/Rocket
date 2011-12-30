@@ -28,7 +28,6 @@ import shamebot.command.KickCommand;
 import shamebot.command.LaunchCommand;
 import shamebot.command.LauncherCommand;
 import shamebot.command.ModeCommand;
-import shamebot.command.RocketPermission;
 import shamebot.command.ShootCommand;
 import shamebot.command.ShooterCommand;
 import shamebot.command.StopCommand;
@@ -39,7 +38,6 @@ public class Rocket extends JavaPlugin {
 
 	private HashMap<Entity,Rocketeer> flying = new HashMap<Entity, Rocketeer>();
 	private Logger log = Logger.getLogger("Minecraft");
-	private RocketPermission rocketPermission;
 	
 	LaunchCommand launch;
 	LauncherCommand launcher;
@@ -130,7 +128,6 @@ public class Rocket extends JavaPlugin {
         fly = new FlyCommand(this);
         kick = new KickCommand(this);
         
-        rocketPermission = new RocketPermission();
         
         getServer().getPluginManager().registerEvent(Type.ENTITY_DAMAGE, entityListener, Priority.High, this);
         getServer().getPluginManager().registerEvent(Type.PLAYER_INTERACT_ENTITY, ModeCommand.getListener(), Priority.Normal, this);
@@ -187,8 +184,4 @@ public class Rocket extends JavaPlugin {
     	return null;
     }
     
-    public boolean hasPermission(CommandSender sender, String node)
-    {
-    	return rocketPermission.hasPermission(sender, node);
-    }
 }

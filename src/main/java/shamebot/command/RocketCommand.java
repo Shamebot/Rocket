@@ -11,6 +11,8 @@ public abstract class RocketCommand implements CommandExecutor {
 	
 	protected Rocket rocket;
 	protected static final String NO_PERMISSION = "You have insufficent permissions";
+    protected static final String NODE_ALL = "rocket.*";
+	
 	
 	public RocketCommand(Rocket rocket)
 	{
@@ -21,7 +23,7 @@ public abstract class RocketCommand implements CommandExecutor {
 
 	protected boolean hasPermissionOrError(CommandSender sender, String node)
 	{
-		boolean has = rocket.hasPermission(sender, node);
+		boolean has = sender.hasPermission(node) || sender.hasPermission(NODE_ALL);
 		if(!has)
     	{
     		sender.sendMessage(NO_PERMISSION);
